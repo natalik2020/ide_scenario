@@ -1,15 +1,13 @@
 package belovaTestScenario1;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-
-import org.openqa.selenium.*;
-
-public class LiveLibTest {
+public class LiveLibTestBelova {
     private static WebDriver driver;
 
     public static void main(String[] args) throws InterruptedException {
@@ -22,41 +20,41 @@ public class LiveLibTest {
 
         loginToLivelib();
 
-        //профиль
+        //Поиск по сайту
         {
-            String xpathExpression = "//a[text()='Профиль']";
+            String xpathExpression = "//input[@name='sq']";
+            webDriverWait.until(ExpectedConditions.elementToBeClickable(By.xpath(xpathExpression)));
+            driver.findElement(By.xpath(xpathExpression)).sendKeys("Белова");
+        }
+        //Go
+        {
+            driver.findElement(By.xpath("//input[@type='image']")).click();
+        }
+
+        //Алиса Белова
+        {
+            String xpathExpression = "//a[contains(@href, '/author/23422')]";
             webDriverWait.until(ExpectedConditions.elementToBeClickable(By.xpath(xpathExpression)));
             driver.findElement(By.xpath(xpathExpression)).click();
         }
 
-        //настройки
+        //  Милитариум. Мир на грани
         {
-            String xpathExpression = "//b[text()='Настройки']";
+            String xpathExpression = "//a[contains(text(),'Милитариум. Мир на грани')]";
             webDriverWait.until(ExpectedConditions.elementToBeClickable(By.xpath(xpathExpression)));
             driver.findElement(By.xpath(xpathExpression)).click();
         }
 
-        //имя
+        //Читать
         {
-            String xpathExpression = "//input[@name='myName']";
+            String xpathExpression = "//a[contains(text(),'Читать')]";
             webDriverWait.until(ExpectedConditions.elementToBeClickable(By.xpath(xpathExpression)));
-            driver.findElement(By.xpath(xpathExpression)).sendKeys("Наталия");
-
+            driver.findElement(By.xpath(xpathExpression)).click();
         }
-
-        //фамилия
-        {
-            String xpathExpression = "//input[@name='mySecondName']";
-            webDriverWait.until(ExpectedConditions.elementToBeClickable(By.xpath(xpathExpression)));
-            driver.findElement(By.xpath(xpathExpression)).sendKeys("Лаврухина");
-        }
-
-        driver.findElement(By.xpath("//input[@type='submit']")).click();
     }
 
     private static void loginToLivelib() throws InterruptedException {
         driver.get("https://www.litlib.net");
-        //Thread.sleep(2000);
         driver.findElement(By.name("fname")).sendKeys("student1");
         driver.findElement(By.name("pass")).sendKeys("123xaxa");
         driver.findElement(By.xpath("//input[@type='submit']")).click();
