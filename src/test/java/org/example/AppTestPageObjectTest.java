@@ -1,6 +1,8 @@
 package org.example;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import io.qameta.allure.Description;
+import io.qameta.allure.Step;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -15,7 +17,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  * Unit test for simple App.
  */
 
-public class AppTestPageObject {
+public class AppTestPageObjectTest {
     public static final String A_TEXT_ПРОФИЛЬ = "//a[text()='Профиль']";
     public static final String TEXT_НАСТРОЙКИ = "//b[text()='Настройки']";
     public static final String INPUT_NAME_MY_NAME = "//input[@name='myName']";
@@ -64,6 +66,7 @@ public class AppTestPageObject {
     @FindBy(xpath = XPATH_MY_NAME)
     WebElement nameElement;
 
+
     @BeforeAll
     static void beforeAll() {
         WebDriverManager.chromedriver().setup();
@@ -82,10 +85,11 @@ public class AppTestPageObject {
 
     @AfterEach
     void tearDown() {
-        // driver.quit();
+        driver.quit();
     }
 
     @Test
+    @Description("Тест на изменение профиля")
     public void settingsName() throws InterruptedException {
         editProfile();
         openSettings();
@@ -104,32 +108,32 @@ public class AppTestPageObject {
         }
     }
 
+    @Step("Заполнить фамилию")
     private void editMySurname() {
-        //фамилия
         {
             webDriverWait.until(ExpectedConditions.elementToBeClickable(By.xpath(MY_SECOND_NAME)));
             secondNameInput.sendKeys("Лаврухина");
         }
     }
 
+    @Step("Заполнить имя")
     private void editMyName() {
-        //имя
         {
             webDriverWait.until(ExpectedConditions.elementToBeClickable(By.xpath(INPUT_NAME_MY_NAME)));
             myNameInput.sendKeys("Наталия");
         }
     }
 
+    @Step("Открыть настройки")
     private void openSettings() {
-        //настройки
         {
             webDriverWait.until(ExpectedConditions.elementToBeClickable(By.xpath(TEXT_НАСТРОЙКИ)));
             openSettingsTest.click();
         }
     }
 
+    @Step("Редактировать профиль")
     private void editProfile() {
-        //профиль
         {
             webDriverWait.until(ExpectedConditions.elementToBeClickable(By.xpath(A_TEXT_ПРОФИЛЬ)));
             editPpofileText.click();
@@ -137,6 +141,7 @@ public class AppTestPageObject {
     }
 
     @Test
+    @Description("Поиск писателя Алиса Белова")
     public void testBelova() throws InterruptedException {
         siteSearching();
         go();
@@ -153,39 +158,39 @@ public class AppTestPageObject {
         }
     }
 
+    @Step("Читать книгу")
     private void reading() {
-        //Читать
         {
             webDriverWait.until(ExpectedConditions.elementToBeClickable(By.xpath(CONTAINS_TEXT_ЧИТАТЬ)));
             readingBook.click();
         }
     }
 
+    @Step("Открыть книгу")
     private void openBookMilitarium() {
-        //  Милитариум. Мир на грани
         {
             webDriverWait.until(ExpectedConditions.elementToBeClickable(By.xpath(МИЛИТАРИУМ_МИР_НА_ГРАНИ)));
             militariumBook.click();
         }
     }
 
+    @Step("Открыть профиль Алиса Белова")
     private void openAliceBelova() {
-        //Алиса Белова
         {
             webDriverWait.until(ExpectedConditions.elementToBeClickable(By.xpath(HREF_AUTHOR_23422)));
             aliceBelovaLink.click();
         }
     }
 
+    @Step("Go!")
     private void go() {
-        //Go
         {
             goInput.click();
         }
     }
 
+    @Step("Поиск по сайту")
     private void siteSearching() {
-        //Поиск по сайту
         {
             webDriverWait.until(ExpectedConditions.elementToBeClickable(By.xpath(XPATH_POISK_PO_SAJTU)));
             searchSiteInput.sendKeys("Белова");
@@ -193,6 +198,7 @@ public class AppTestPageObject {
     }
 
     @Test
+    @Description("Тест на ввод букв в цифровое поле")
     public void testNegativeBukvyNomer() throws InterruptedException {
         editProfile();
         openSettings();
@@ -211,6 +217,7 @@ public class AppTestPageObject {
         }
     }
 
+    @Step("Заполнить поле ICQ")
     private void vvodIcq() {
         {
             webDriverWait.until(ExpectedConditions.elementToBeClickable(By.xpath(NAME_ICQ)));
@@ -218,6 +225,7 @@ public class AppTestPageObject {
         }
     }
 
+    @Step("Заполнить поле контакты")
     private void editContacts() {
         {
             webDriverWait.until(ExpectedConditions.elementToBeClickable(By.xpath(XPATH_CONTACTS)));
@@ -226,6 +234,7 @@ public class AppTestPageObject {
     }
 
     @Test
+    @Description("Тест на удаление из профиля обязательного поля имя")
     public void settingsNameNegative() throws InterruptedException {
         editProfile();
         openSettings();
@@ -242,8 +251,8 @@ public class AppTestPageObject {
         }
     }
 
+    @Step("Заполнить поле фамилия")
     private void surname() {
-        //фамилия
         {
             webDriverWait.until(ExpectedConditions.elementToBeClickable(By.xpath(XPATH_SECOND_NAME)));
             surnameInput.sendKeys("   ");
@@ -252,8 +261,8 @@ public class AppTestPageObject {
         }
     }
 
+    @Step("Заполнить поле имя")
     private void name() {
-        //имя
         {
             webDriverWait.until(ExpectedConditions.elementToBeClickable(By.xpath(XPATH_MY_NAME)));
             nameElement.clear();
@@ -261,11 +270,9 @@ public class AppTestPageObject {
         }
     }
 
-
-
+    @Step("Залогиниться")
     private void loginToLivelib() {
         driver.get("https://www.litlib.net");
-        //Thread.sleep(2000);
         driver.findElement(By.name("fname")).sendKeys("student1");
         driver.findElement(By.name("pass")).sendKeys("123xaxa");
         driver.findElement(By.xpath("//input[@type='submit']")).click();

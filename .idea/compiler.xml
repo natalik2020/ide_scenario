@@ -6,8 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="ide_scenario" />
+        <module name="geek_web_ui_tests" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="ide_scenario" target="8" />
+    </bytecodeTargetLevel>
   </component>
 </project>

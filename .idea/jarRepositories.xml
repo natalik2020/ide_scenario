@@ -21,5 +21,10 @@
       <option name="name" value="name1" />
       <option name="url" value="https://nexus.qiwi.com/repository" />
     </remote-repository>
+    <remote-repository>
+      <option name="id" value="our_repository" />
+      <option name="name" value="name" />
+      <option name="url" value="https://nexus.qiwi.com/repository" />
+    </remote-repository>
   </component>
 </project>
