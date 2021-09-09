@@ -10,7 +10,7 @@ import java.io.ByteArrayInputStream;
 
 public class CustomLogger implements WebDriverEventListener {
     private static Logger logger = LoggerFactory.getLogger(WebDriver.class);
-    private Object WebDriver;
+  //  private Object WebDriver;
 
     @Override
     public void beforeAlertAccept(WebDriver driver) {
@@ -88,7 +88,7 @@ public class CustomLogger implements WebDriverEventListener {
         Allure.step("Кликаем на элемент с текстом " + element.getText());
 
         Allure.addAttachment("Скриншот страницы", new ByteArrayInputStream(
-                ((TakesScreenshot) WebDriver).getScreenshotAs(OutputType.BYTES)));
+                ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES)));
     }
 
     @Override

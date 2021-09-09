@@ -3,21 +3,21 @@ package org.example;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import io.qameta.allure.Description;
 import io.qameta.allure.Step;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
  * Unit test for simple App.
  */
 
-public class AppTestPageObjectTest {
+public class AppTestPageObjectTest extends BaseTestIde {
     public static final String A_TEXT_ПРОФИЛЬ = "//a[text()='Профиль']";
     public static final String TEXT_НАСТРОЙКИ = "//b[text()='Настройки']";
     public static final String INPUT_NAME_MY_NAME = "//input[@name='myName']";
@@ -32,8 +32,8 @@ public class AppTestPageObjectTest {
     public static final String XPATH_SECOND_NAME = "//input[@name='mySecondName']";
     public static final String XPATH_MY_NAME = "//input[@name='myName']";
 
-    private WebDriverWait webDriverWait;
-    private static WebDriver driver;
+//    private WebDriverWait webDriverWait;
+//    private static WebDriver driver;
 
     @FindBy(xpath = A_TEXT_ПРОФИЛЬ)
     WebElement editPpofileText;
@@ -74,18 +74,9 @@ public class AppTestPageObjectTest {
 
     @BeforeEach
     public void beforeEach() {
-        driver = new ChromeDriver();
+        initDriver();
         PageFactory.initElements(driver, this);
-
-        driver.manage().window().maximize();
-        webDriverWait = new WebDriverWait(driver, 5);
-
         loginToLivelib();
-    }
-
-    @AfterEach
-    void tearDown() {
-        driver.quit();
     }
 
     @Test

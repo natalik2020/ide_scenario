@@ -13,13 +13,17 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  * Unit test for simple App.
  */
 
-public class AppTest {
+public class AppTest_NOT_RUN {
     private WebDriverWait webDriverWait;
     private static WebDriver driver;
 
     @BeforeAll
     static void beforeAll() {
+
         WebDriverManager.chromedriver().setup();
+        if (true){ //todo remove
+            throw new RuntimeException();
+        }
     }
 
     @BeforeEach
@@ -34,12 +38,11 @@ public class AppTest {
 
     @AfterEach
     void tearDown() {
-       // driver.quit();
+       driver.quit();
     }
 
     @Test
     public void settingsName() throws InterruptedException {
-
         //профиль
         {
             String xpathExpression = "//a[text()='Профиль']";
